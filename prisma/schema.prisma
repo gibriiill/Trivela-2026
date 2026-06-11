@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  username      String    @unique
+  email         String    @unique
+  password      String
+  fullName      String?
+  year          String?
+  department    String?
+  mobile        String?   @unique
+  college       String?
+  totalPoints   Int       @default(0)
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  predictions Prediction[]
+
+  @@map("users")
+}
+
+model Match {
+  id           String      @id @default(cuid())
+  teamA        String
+  teamB        String
+  teamAFlag    String?
+  teamBFlag    String?
+  group        String?
+  stage        MatchStage  @default(GROUP)
+  venue        String?
+  kickoffTime  DateTime
+  status       MatchStatus @default(UPCOMING)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  predictions Prediction[]
+  result      Result?
+
+  @@map("matches")
+}
+
+model Prediction {
+  id                 String      @id @default(cuid())
+  userId             String
+  matchId            String
+  resultPrediction   MatchResult
+  homeScore          Int
+  awayScore          Int
+  cleanSheet         Boolean
+  pointsEarned       Int         @default(0)
+  isCalculated       Boolean     @default(false)
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  match  Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, matchId])
+  @@map("predictions")
+}
+
+model Result {
+  id           String      @id @default(cuid())
+  matchId      String      @unique
+  homeScore    Int
+  awayScore    Int
+  winningTeam  MatchResult
+  cleanSheet   Boolean
+  publishedAt  DateTime    @default(now())
+
+  match Match @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  @@map("results")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  email     String
+  token     String    @unique
+  expires   DateTime
+  createdAt DateTime  @default(now())
+
+  @@unique([email, token])
+  @@map("password_reset_tokens")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum MatchStatus {
+  UPCOMING
+  LIVE
+  COMPLETED
+}
+
+enum MatchStage {
+  GROUP
+  ROUND_OF_16
+  QUARTER_FINAL
+  SEMI_FINAL
+  THIRD_PLACE
+  FINAL
+}
+
+enum MatchResult {
+  HOME
+  AWAY
+  DRAW
+}
