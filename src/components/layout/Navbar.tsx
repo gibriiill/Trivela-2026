@@ -67,9 +67,13 @@ export function Navbar() {
                 </div>
                 <Link
                   href={session.user.role === "ADMIN" ? "/admin" : "/profile"}
-                  className="text-blue-border hover:text-gold transition-colors text-sm font-heading"
+                  className={cn(
+                    session.user.role === "ADMIN"
+                      ? "btn-gold text-xs px-4 py-2"
+                      : "text-blue-border hover:text-gold transition-colors text-sm font-heading"
+                  )}
                 >
-                  {session.user.role === "ADMIN" ? "Admin" : "Profile"}
+                  {session.user.role === "ADMIN" ? "Admin Panel" : "Profile"}
                 </Link>
                 <button
                   onClick={() => signOut()}

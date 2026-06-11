@@ -28,7 +28,12 @@ export default async function PredictionsPage() {
     `,
   ]);
 
-  const stats_data = (stats as any)[0] || {};
+  const raw = (stats as any)[0] || {};
+const stats_data = {
+  submitted: Number(raw.submitted ?? 0),
+  calculated: Number(raw.calculated ?? 0),
+  totalPoints: Number(raw.totalpoints ?? 0),
+};
   const unpredicted = await prisma.match.findMany({
     where: {
       status: "UPCOMING",

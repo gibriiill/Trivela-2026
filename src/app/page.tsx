@@ -57,6 +57,9 @@ export default async function Home() {
             <span className="text-sm font-heading font-bold text-gold">Official Contest</span>
           </div>
 
+          <p className="text-xs uppercase tracking-[0.3em] text-gold font-heading font-bold">
+            UNION MEC PRESENTS
+          </p>
           <h1 className="font-display text-5xl md:text-7xl text-gold-gradient">TRIVELA</h1>
           <p className="text-xl md:text-2xl text-blue-border font-heading">
             2026 FIFA World Cup Prediction Contest

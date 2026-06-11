@@ -18,10 +18,10 @@ export default async function AdminLayout({
     <div>
       <div className="bg-gold text-blue-deep py-4 px-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link href="/admin" className="flex items-center gap-2 hover:opacity-90">
             <Shield size={24} />
             <span className="font-heading font-bold text-lg">Admin Panel</span>
-          </div>
+          </Link>
           <div className="text-sm font-heading font-bold">
             Signed in as: {session.user.username}
           </div>

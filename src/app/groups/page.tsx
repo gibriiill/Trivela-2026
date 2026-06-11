@@ -1,9 +1,26 @@
 import { prisma } from "@/lib/prisma";
 import { COUNTRY_FLAGS } from "@/types";
+import { getGroupStandings } from "@/app/groups/helpers";
 
 export const dynamic = "force-dynamic";
 
-const groupStandings: Record<string, { team: string; group: string }[]> = {
+type GroupTeam = {
+  team: string;
+  group: string;
+};
+
+type TeamStanding = GroupTeam & {
+  played: number;
+  wins: number;
+  draws: number;
+  losses: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDifference: number;
+  points: number;
+};
+
+const groupStandings: Record<string, GroupTeam[]> = {
   A: [
     { team: "Mexico", group: "A" },
     { team: "South Africa", group: "A" },
@@ -86,6 +103,31 @@ export default async function GroupsPage({
   const selectedGroup = (searchParams.group || "A") as string;
   const teams = groupStandings[selectedGroup as keyof typeof groupStandings] || [];
 
+  const completedMatches = await prisma.match.findMany({
+    where: {
+      stage: "GROUP",
+      group: selectedGroup,
+      status: "COMPLETED",
+      result: {
+        isNot: null,
+      },
+    },
+    include: {
+      result: true,
+    },
+  });
+
+  const standings = getGroupStandings(
+    teams.map((team) => team.team),
+    completedMatches.map((match) => ({
+      teamA: match.teamA,
+      teamB: match.teamB,
+      group: match.group,
+      stage: match.stage,
+      result: match.result,
+    }))
+  );
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 space-y-8">
       <div className="space-y-4">
@@ -128,7 +170,7 @@ export default async function GroupsPage({
             </tr>
           </thead>
           <tbody>
-            {teams.map((team, idx) => (
+            {standings.map((team, idx) => (
               <tr
                 key={team.team}
                 className={`border-b border-blue-border/30 ${
@@ -142,14 +184,14 @@ export default async function GroupsPage({
                     <span className="font-heading font-bold">{team.team}</span>
                   </span>
                 </td>
-                <td className="px-4 py-3 text-center text-blue-border">0</td>
-                <td className="px-4 py-3 text-center text-blue-border">0</td>
-                <td className="px-4 py-3 text-center text-blue-border">0</td>
-                <td className="px-4 py-3 text-center text-blue-border">0</td>
-                <td className="px-4 py-3 text-center text-blue-border">0</td>
-                <td className="px-4 py-3 text-center text-blue-border">0</td>
-                <td className="px-4 py-3 text-center text-blue-border">0</td>
-                <td className="px-4 py-3 text-right font-heading font-bold text-gold">0</td>
+                <td className="px-4 py-3 text-center text-blue-border">{team.played}</td>
+                <td className="px-4 py-3 text-center text-blue-border">{team.wins}</td>
+                <td className="px-4 py-3 text-center text-blue-border">{team.draws}</td>
+                <td className="px-4 py-3 text-center text-blue-border">{team.losses}</td>
+                <td className="px-4 py-3 text-center text-blue-border">{team.goalsFor}</td>
+                <td className="px-4 py-3 text-center text-blue-border">{team.goalsAgainst}</td>
+                <td className="px-4 py-3 text-center text-blue-border">{team.goalDifference}</td>
+                <td className="px-4 py-3 text-right font-heading font-bold text-gold">{team.points}</td>
               </tr>
             ))}
           </tbody>
