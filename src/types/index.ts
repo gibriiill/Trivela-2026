@@ -7,11 +7,11 @@ export interface User {
   id: string;
   username: string;
   email: string;
-  fullName?: string;
-  year?: string;
-  department?: string;
-  mobile?: string;
-  college?: string;
+  fullName?: string | null;
+  year?: string | null;
+  department?: string | null;
+  mobile?: string | null;
+  college?: string | null;
   totalPoints: number;
   role: Role;
   createdAt: Date;
@@ -22,16 +22,16 @@ export interface Match {
   id: string;
   teamA: string;
   teamB: string;
-  teamAFlag?: string;
-  teamBFlag?: string;
-  group?: string;
+  teamAFlag?: string | null;
+  teamBFlag?: string | null;
+  group?: string | null;
   stage: MatchStage;
-  venue?: string;
+  venue?: string | null;
   kickoffTime: Date;
   status: MatchStatus;
   createdAt: Date;
   updatedAt: Date;
-  result?: Result;
+  result?: Result | null;
   _count?: {
     predictions: number;
   };
@@ -66,11 +66,11 @@ export interface Result {
 export interface LeaderboardEntry {
   id: string;
   username: string;
-  fullName?: string;
+  fullName?: string | null;
   totalPoints: number;
   rank: number;
   predictions: number;
-  college?: string;
+  college?: string | null;
 }
 
 export interface ScoreCalculation {

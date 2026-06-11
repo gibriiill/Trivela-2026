@@ -6,20 +6,15 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { Eye, EyeOff, Check, X } from "lucide-react";
 
-const departments = {
-  "Engineering": ["Computer Science", "Mechanical", "Electrical", "Civil"],
-  "Business": ["Finance", "Management", "Marketing"],
-  "Design": ["UX/UI", "Graphics", "Industrial"],
-};
+const departments = ["CS", "CU", "MECH", "EC", "EEE", "EV", "EB"];
 
-const years = ["2024", "2025", "2026", "2027", "Graduated"];
+const years = ["2026", "2027", "2028", "2029"];
 
 export default function RegisterPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [college, setCollege] = useState<"RIT Kottayam" | "Other" | null>(null);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -30,7 +25,6 @@ export default function RegisterPage() {
     year: "",
     department: "",
     mobile: "",
-    college: "",
   });
 
   const [passwordStrength, setPasswordStrength] = useState({
@@ -86,7 +80,15 @@ export default function RegisterPage() {
   };
 
   const isPasswordValid = passwordStrength.length && passwordStrength.uppercase && passwordStrength.number;
-  const isFormValid = isPasswordValid && formData.confirmPassword === formData.password && formData.fullName && formData.username && formData.email && formData.year && formData.department && formData.mobile && formData.college;
+  const isFormValid =
+    isPasswordValid &&
+    formData.confirmPassword === formData.password &&
+    formData.fullName &&
+    formData.username &&
+    formData.email &&
+    formData.year &&
+    formData.department &&
+    formData.mobile;
 
   return (
     <div className="min-h-screen px-4 py-12 bg-blue-deep">
@@ -103,30 +105,6 @@ export default function RegisterPage() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          {/* College Selection */}
-          <div className="space-y-3">
-            <label className="block text-sm font-heading font-bold">College</label>
-            <div className="grid grid-cols-2 gap-3">
-              {(["RIT Kottayam", "Other"] as const).map((c) => (
-                <button
-                  key={c}
-                  type="button"
-                  onClick={() => {
-                    setCollege(c);
-                    setFormData((prev) => ({ ...prev, college: c }));
-                  }}
-                  className={`p-3 rounded-lg font-heading font-bold transition-all ${
-                    college === c
-                      ? "bg-gold text-blue-deep border-2 border-gold"
-                      : "card-dark border-2 border-blue-border hover:border-gold"
-                  }`}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Personal Info */}
           <div className="space-y-4">
             <h3 className="font-heading font-bold text-gold">Personal Information</h3>
@@ -172,14 +150,10 @@ export default function RegisterPage() {
                   required
                 >
                   <option value="">Select Department</option>
-                  {Object.entries(departments).map(([category, depts]) => (
-                    <optgroup key={category} label={category}>
-                      {depts.map((d) => (
-                        <option key={d} value={d}>
-                          {d}
-                        </option>
-                      ))}
-                    </optgroup>
+                  {departments.map((dept) => (
+                    <option key={dept} value={dept}>
+                      {dept}
+                    </option>
                   ))}
                 </select>
               </div>

@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { username, email, password, fullName, year, department, mobile, college } = validation.data;
+    const { username, email, password, fullName, year, department, mobile } = validation.data;
 
     // Check unique constraints
     const [existingUsername, existingEmail, existingMobile] = await Promise.all([
@@ -49,7 +49,6 @@ export async function POST(req: NextRequest) {
         year,
         department,
         mobile,
-        college,
       },
       select: {
         id: true,

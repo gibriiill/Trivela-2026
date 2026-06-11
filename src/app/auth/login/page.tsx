@@ -109,7 +109,7 @@ export default function LoginPage() {
             Forgot your password?
           </Link>
           <p className="text-blue-border">
-            Don't have an account?{" "}
+            Do not have an account?{" "}
             <Link href="/auth/register" className="text-gold hover:text-gold-light transition-colors font-bold">
               Register now
             </Link>

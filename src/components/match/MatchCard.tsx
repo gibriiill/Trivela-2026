@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Match, Prediction } from "@/types";
@@ -134,13 +135,22 @@ export function MatchCard({
       )}
 
       {/* Actions */}
-      {showPredictButton && session?.user && match.status === "UPCOMING" && !isLocked && (
-        <Link
-          href={`/predictions/${match.id}`}
-          className="btn-gold w-full text-center text-sm py-2"
-        >
-          {userPrediction ? "Edit Prediction" : "Make Prediction"}
-        </Link>
+      {showPredictButton && match.status === "UPCOMING" && !isLocked && (
+        session?.user ? (
+          <Link
+            href={`/predictions/${match.id}`}
+            className="btn-gold w-full text-center text-sm py-2"
+          >
+            {userPrediction ? "Edit Prediction" : "Make Prediction"}
+          </Link>
+        ) : (
+          <Link
+            href="/auth/login"
+            className="btn-outline w-full text-center text-sm py-2"
+          >
+            Sign in to Predict
+          </Link>
+        )
       )}
     </div>
   );

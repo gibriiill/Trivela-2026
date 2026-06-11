@@ -11,10 +11,9 @@ export const registerSchema = z
       .regex(/\d/, "At least one number"),
     confirmPassword: z.string(),
     fullName: z.string().min(2).max(60),
-    year: z.enum(["2024", "2025", "2026", "2027", "Graduated"]),
+    year: z.enum(["2026", "2027", "2028", "2029"]),
     department: z.string(),
     mobile: z.string().regex(/^[6-9]\d{9}$/, "Valid Indian mobile number"),
-    college: z.enum(["RIT Kottayam", "Other"]),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
