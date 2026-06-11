@@ -53,7 +53,7 @@ export const authConfig: NextAuthConfig = {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.username = token.username as string;
-        session.user.role = token.role as string;
+        session.user.role = token.role as "USER" | "ADMIN";
         session.user.totalPoints = token.totalPoints as number;
       }
       return session;

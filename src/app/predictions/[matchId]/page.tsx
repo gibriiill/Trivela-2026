@@ -45,10 +45,7 @@ export default async function PredictionMatchPage({ params }: { params: { matchI
 
       <div className="card-dark p-6">
         <PredictionForm
-          match={{
-            ...match,
-            kickoffTime: match.kickoffTime.toISOString(),
-          }}
+          match={match}
           existingPrediction={existingPrediction}
         />
       </div>

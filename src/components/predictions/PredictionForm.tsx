@@ -6,7 +6,7 @@ import { Match, Prediction } from "@/types";
 import { formatKickoff, getFlag, getResultLabel } from "@/lib/utils";
 
 type PredictionFormProps = {
-  match: Match & { kickoffTime: string | Date };
+  match: Match;
   existingPrediction?: Prediction | null;
 };
 
