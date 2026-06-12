@@ -14,3 +14,5 @@ build/
 *~
 .env.production.local
 .turbo/
+.vercel
+.env*
