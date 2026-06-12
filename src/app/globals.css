@@ -8,21 +8,27 @@
   --gold: #F0B429;
   --gold-light: #FFD166;
   --gold-dark: #B8860B;
-  --blue-deep: #050E1F;
-  --blue-dark: #0A1628;
-  --blue-mid: #0F2040;
-  --blue-card: #0D1B35;
-  --blue-border: #1A2F55;
-  --blue-accent: #1E4B99;
+  --black-deep: #000000;
+  --black-dark: #111111;
+  --black-mid: #141414;
+  --black-card: #111111;
+  --black-border: #2A2A2A;
+  --black-accent: #4B4B4B;
+  --blue-deep: var(--black-deep);
+  --blue-dark: var(--black-dark);
+  --blue-mid: var(--black-mid);
+  --blue-card: var(--black-card);
+  --blue-border: var(--black-border);
+  --blue-accent: var(--black-accent);
 }
 
 body {
-  @apply bg-blue-deep text-white font-body;
+  @apply bg-black-deep text-white font-body;
 }
 
 @layer components {
   .card-dark {
-    @apply bg-blue-card border border-blue-border rounded-xl;
+    @apply bg-black-card border border-black-border rounded-xl;
   }
 
   .card-hover {
@@ -30,7 +36,7 @@ body {
   }
 
   .btn-gold {
-    @apply px-6 py-3 bg-gradient-to-r from-gold to-gold-light text-blue-deep font-heading font-bold rounded-lg transition-all hover:shadow-lg hover:shadow-gold/50 active:scale-95;
+    @apply px-6 py-3 bg-gradient-to-r from-gold to-gold-light text-black-deep font-heading font-bold rounded-lg transition-all hover:shadow-lg hover:shadow-gold/50 active:scale-95;
   }
 
   .btn-outline {
@@ -38,11 +44,11 @@ body {
   }
 
   .input-dark {
-    @apply bg-blue-mid border border-blue-border rounded-lg px-4 py-3 text-white placeholder-blue-border transition-all focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent;
+    @apply bg-black-mid border border-black-border rounded-lg px-4 py-3 text-white placeholder-black-border transition-all focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent;
   }
 
   .score-input {
-    @apply w-14 h-14 bg-blue-mid border-2 border-blue-border rounded-lg font-display text-2xl text-center flex items-center justify-center transition-all focus:border-gold focus:ring-2 focus:ring-gold;
+    @apply w-14 h-14 bg-black-mid border-2 border-black-border rounded-lg font-display text-2xl text-center flex items-center justify-center transition-all focus:border-gold focus:ring-2 focus:ring-gold;
   }
 
   .text-gold-gradient {
@@ -50,7 +56,7 @@ body {
   }
 
   .shimmer {
-    background: linear-gradient(90deg, rgba(15, 32, 64, 1) 0%, rgba(30, 75, 153, 0.5) 50%, rgba(15, 32, 64, 1) 100%);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(75, 75, 75, 0.5) 50%, rgba(0, 0, 0, 1) 100%);
     background-size: 1000px 100%;
     animation: shimmer 2s infinite;
   }
@@ -68,10 +74,10 @@ body {
   }
 
   .leaderboard-row-2 {
-    @apply bg-gradient-to-r from-blue-border/30 to-transparent border-l-4 border-blue-border;
+    @apply bg-gradient-to-r from-black-border/30 to-transparent border-l-4 border-black-border;
   }
 
   .leaderboard-row-3 {
-    @apply bg-gradient-to-r from-blue-accent/20 to-transparent border-l-4 border-blue-accent;
+    @apply bg-gradient-to-r from-black-accent/20 to-transparent border-l-4 border-black-accent;
   }
 }
