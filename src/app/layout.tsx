@@ -23,7 +23,7 @@ export default function RootLayout({
           </main>
           <footer className="border-t border-blue-border bg-blue-dark py-8">
             <div className="max-w-7xl mx-auto px-4 text-center text-blue-border text-sm font-heading">
-              © 2026 Trivela • Your Organization Name
+              © 2026 Trivela • COLLEGE UNION MEC
             </div>
           </footer>
         </SessionProviderWrapper>
