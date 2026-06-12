@@ -75,26 +75,27 @@ export default async function Home() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-             {session?.user ? (
+            {session?.user ? (
               <>
-            <Link href="/matches" className="btn-gold px-8 py-4 text-lg font-bold">
-              Browse Matches
-            </Link>
-            <Link href="/groups" className="btn-outline px-8 py-4 text-lg font-bold">
-              View Groups
-            </Link>
-           </>
-           ) : (
-    <>
-      <Link href="/auth/register" className="btn-gold px-8 py-4 text-lg font-bold">
-        Join the Contest
-      </Link>
-      <Link href="/matches" className="btn-outline px-8 py-4 text-lg font-bold">
-        Browse Matches
-      </Link>
-    </>
-  )}
-</div>
+                <Link href="/matches" className="btn-gold px-8 py-4 text-lg font-bold">
+                  Browse Matches
+                </Link>
+                <Link href="/groups" className="btn-outline px-8 py-4 text-lg font-bold">
+                  View Groups
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/auth/register" className="btn-gold px-8 py-4 text-lg font-bold">
+                  Join the Contest
+                </Link>
+                <Link href="/matches" className="btn-outline px-8 py-4 text-lg font-bold">
+                  Browse Matches
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
       </section>
 
       {/* Stats Bar */}
