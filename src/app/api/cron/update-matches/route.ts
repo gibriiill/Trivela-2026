@@ -8,9 +8,9 @@ export async function GET(req: NextRequest) {
   }
 
   const now = new Date();
+  const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000);
 
-  // Set UPCOMING matches to LIVE if kickoff time has passed (within 2 hours)
-  await prisma.match.updateMany({
+  const toLive = await prisma.match.updateMany({
     where: {
       status: "UPCOMING",
       kickoffTime: { lte: now },
@@ -18,9 +18,7 @@ export async function GET(req: NextRequest) {
     data: { status: "LIVE" },
   });
 
-  // Set LIVE matches to COMPLETED if kickoff was more than 2 hours ago
-  const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000);
-  await prisma.match.updateMany({
+  const toCompleted = await prisma.match.updateMany({
     where: {
       status: "LIVE",
       kickoffTime: { lte: twoHoursAgo },
@@ -28,5 +26,10 @@ export async function GET(req: NextRequest) {
     data: { status: "COMPLETED" },
   });
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json({
+    success: true,
+    setToLive: toLive.count,
+    setToCompleted: toCompleted.count,
+    timestamp: now.toISOString(),
+  });
 }
