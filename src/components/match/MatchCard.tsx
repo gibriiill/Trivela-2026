@@ -139,7 +139,7 @@ export function MatchCard({
         session?.user ? (
           <Link
             href={`/predictions/${match.id}`}
-            className="btn-gold w-full text-center text-sm py-2"
+            className="btn-gold w-full text-center text-sm py-2 mx-auto block"
           >
             {userPrediction ? "Edit Prediction" : "Make Prediction"}
           </Link>

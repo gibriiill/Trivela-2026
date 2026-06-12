@@ -10,7 +10,8 @@ type PredictionFormProps = {
   existingPrediction?: Prediction | null;
 };
 
-const getPredictionResult = (homeScore: number, awayScore: number) => {
+const getPredictionResult = (homeScore: number | "", awayScore: number | "") => {
+  if (homeScore === "" || awayScore === "") return "DRAW";
   if (homeScore > awayScore) return "HOME";
   if (homeScore < awayScore) return "AWAY";
   return "DRAW";
@@ -18,8 +19,8 @@ const getPredictionResult = (homeScore: number, awayScore: number) => {
 
 export default function PredictionForm({ match, existingPrediction }: PredictionFormProps) {
   const router = useRouter();
-  const [homeScore, setHomeScore] = useState<number>(existingPrediction?.homeScore ?? 0);
-  const [awayScore, setAwayScore] = useState<number>(existingPrediction?.awayScore ?? 0);
+  const [homeScore, setHomeScore] = useState<number | "">(existingPrediction?.homeScore ?? "");
+  const [awayScore, setAwayScore] = useState<number | "">(existingPrediction?.awayScore ?? "");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
