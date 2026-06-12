@@ -61,11 +61,11 @@ export default async function Home() {
             UNION MEC PRESENTS
           </p>
           <h1 className="font-display text-5xl md:text-7xl text-gold-gradient">TRIVELA</h1>
-          <p className="text-xl md:text-2xl text-blue-border font-heading">
+          <p className="text-xl md:text-2xl text-slate-200 font-heading">
             2026 FIFA World Cup Prediction Contest
           </p>
 
-          <p className="text-lg text-blue-border max-w-2xl mx-auto">
+          <p className="text-lg text-slate-200 max-w-2xl mx-auto">
             Predict match results, compete with millions of fans, and climb the leaderboard. Test
             your football knowledge!
           </p>
@@ -104,17 +104,17 @@ export default async function Home() {
           <div className="space-y-2">
             <Users size={32} className="mx-auto text-gold" />
             <p className="font-display text-3xl text-gold">{Number(userCount).toLocaleString()}</p>
-            <p className="text-sm text-blue-border font-heading">Participants</p>
+            <p className="text-sm text-slate-300 font-heading">Participants</p>
           </div>
           <div className="space-y-2">
             <Lightning size={32} className="mx-auto text-gold" />
             <p className="font-display text-3xl text-gold">{predCount.toLocaleString()}</p>
-            <p className="text-sm text-blue-border font-heading">Predictions Made</p>
+            <p className="text-sm text-slate-300 font-heading">Predictions Made</p>
           </div>
           <div className="space-y-2">
             <BarChart3 size={32} className="mx-auto text-gold" />
             <p className="font-display text-3xl text-gold">{matchCount}</p>
-            <p className="text-sm text-blue-border font-heading">Matches Completed</p>
+            <p className="text-sm text-slate-300 font-heading">Matches Completed</p>
           </div>
         </div>
       </section>
@@ -136,7 +136,7 @@ export default async function Home() {
                   <span className="font-display text-2xl text-blue-deep">{item.step}</span>
                 </div>
                 <h3 className="font-heading font-bold">{item.title}</h3>
-                <p className="text-sm text-blue-border">{item.desc}</p>
+                <p className="text-sm text-slate-300">{item.desc}</p>
               </div>
             ))}
           </div>
