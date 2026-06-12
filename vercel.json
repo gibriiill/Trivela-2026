@@ -1,8 +1,8 @@
 {
-    "crons": [
-        {
-            "path": "/api/cron/update-points",
-            "schedule": "* * * * *"
-        }
-    ]
+  "crons": [
+    {
+      "path": "/api/cron/update-matches",
+      "schedule": "0 * * * *"
+    }
+  ]
 }
