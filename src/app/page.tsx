@@ -71,7 +71,7 @@ export default async function Home() {
           </p>
 
           <div className="pt-8">
-            <CountdownTimer targetDate={new Date("2026-06-11T18:00:00Z")} />
+            <CountdownTimer targetDate={new Date("2026-07-19T19:00:00Z")} />
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">

@@ -54,11 +54,17 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   );
 
   return (
-    <div className="flex gap-4 justify-center flex-wrap">
-      <TimeUnit value={time.days} label="Days" />
-      <TimeUnit value={time.hours} label="Hours" />
-      <TimeUnit value={time.minutes} label="Mins" />
-      <TimeUnit value={time.seconds} label="Secs" />
+    <div className="flex flex-col items-center">
+      <div className="flex gap-4 justify-center flex-wrap">
+        <TimeUnit value={time.days} label="Days" />
+        <TimeUnit value={time.hours} label="Hours" />
+        <TimeUnit value={time.minutes} label="Mins" />
+        <TimeUnit value={time.seconds} label="Secs" />
+      </div>
+
+      <p className="text-sm font-heading text-blue-border uppercase mt-4">
+        Until World Cup Final
+      </p>
     </div>
-  );
+);
 }
