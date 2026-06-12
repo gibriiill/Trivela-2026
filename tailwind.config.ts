@@ -22,8 +22,8 @@ const config: Config = {
         "blue-dark": "#0F0F0F",
         "blue-mid": "#18181B",
         "blue-card": "#1F1F23",
-        "blue-border": "#E5E7EB",
-        "blue-accent": "#F8FAFC",
+        "blue-border": "#6B7280",
+        "blue-accent": "#9CA3AF",
       },
       fontFamily: {
         display: ["Bebas Neue", "sans-serif"],
