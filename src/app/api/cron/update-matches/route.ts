@@ -1,9 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export async function GET(req: NextRequest) {
+function isAuthorizedCronRequest(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  const cronHeader = req.headers.get("x-vercel-cron");
+
+  return (
+    authHeader === `Bearer ${process.env.CRON_SECRET}` ||
+    cronHeader === "1" ||
+    cronHeader?.toLowerCase() === "true"
+  );
+}
+
+export async function GET(req: NextRequest) {
+  if (!isAuthorizedCronRequest(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
