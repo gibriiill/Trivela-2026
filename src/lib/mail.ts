@@ -1,19 +1,21 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  secure: false, // for port 587
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
 export async function sendPasswordResetEmail(
   email: string,
   resetLink: string
 ) {
-  const apiKey = process.env.RESEND_API_KEY;
-
-  if (!apiKey) {
-    throw new Error("RESEND_API_KEY is not configured");
-  }
-
-  const resend = new Resend(apiKey);
-
-  const { error } = await resend.emails.send({
-    from: "onboarding@resend.dev",
+  await transporter.sendMail({
+    from: process.env.EMAIL_FROM,
     to: email,
     subject: "Reset your Trivela password",
     html: `
@@ -28,9 +30,4 @@ export async function sendPasswordResetEmail(
       <p>If you did not request a password reset, you can safely ignore this email.</p>
     `,
   });
-
-  if (error) {
-    console.error("Resend error:", error);
-    throw new Error(error.message);
-  }
 }
